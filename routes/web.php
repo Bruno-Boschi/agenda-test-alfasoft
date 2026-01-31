@@ -22,11 +22,14 @@ Route::get('/', function () {
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
+    Route::get('/contact/form', [ContactController::class, 'show'])->name('contact.create');
+    Route::get('/contact/form/{contact}', [ContactController::class, 'show'])->name('contact.edit');
+    Route::put('/contact/{contact}', [ContactController::class, 'update'])->name('contact.update');
+    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+    Route::delete('/contact/{contact}', [ContactController::class, 'destroy'])->name('contact.destroy');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

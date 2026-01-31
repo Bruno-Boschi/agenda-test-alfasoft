@@ -1,13 +1,22 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Meus Contatos') }}
+            {{ __('Contatos') }}
         </h2>
+
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-sm sm:rounded-lg p-6">
+                <div class="flex justify-between items-center mb-6">
+
+                    <a href="{{ route('contact.create') }}"
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                        + Adicionar Contato
+                    </a>
+                </div>
+
                 <table class="min-w-full border border-gray-200" id="contacts-table">
                     <thead class="bg-gray-100">
                         <tr>
@@ -25,6 +34,10 @@
                                 <td class="px-4 py-2">{{ $contact->email }}</td>
                                 <td class="px-4 py-2">{{ $contact->phone ?? '-' }}</td>
                                 <td class="px-4 py-2">
+                                    <a href="{{ route('contact.edit', $contact) }}"
+                                        class="text-blue-600 hover:underline">
+                                        Editar
+                                    </a>
                                     <button class="delete-contact text-red-600 hover:underline">
                                         Excluir
                                     </button>
@@ -56,7 +69,7 @@
                 let contactId = row.data('id');
 
                 $.ajax({
-                    url: `/contacts/${contactId}`,
+                    url: `/contact/${contactId}`,
                     type: 'DELETE',
                     data: {
                         _token: '{{ csrf_token() }}'
