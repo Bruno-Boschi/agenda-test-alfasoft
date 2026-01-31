@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -13,9 +14,6 @@ class ContactController extends Controller
 
     public function destroy(Contact $contact)
     {
-
-        // abort_if($contact->created_by_user_id !== auth()->id(), 403);
-
         $contact->delete();
         return response()->json(['success' => true]);
     }
