@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->unique();
             $table->foreignId('created_by_user_id')
-                ->constrained()
+                ->constrained('users')
                 ->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
